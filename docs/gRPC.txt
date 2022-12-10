@@ -1,0 +1,24 @@
+gRPC documentation for location microservice.
+
+using the template in location-api/client.py sample with below payload 
+'''
+def request_location_id(stub):
+    location_id = locations_pb2.LocationRequestId(location_id="30")
+    print("checking")
+    response = stub.GetLocationId(location_id)
+    print(response)
+
+==> clients will send location_id and then they will revice the message include loaction_id, latitude, longtitude.
+
+
+def create_location(stub):
+    new_location = locations_pb2.LocationMessage(
+        person_id="123",
+        creation_time="2022-08-15 10:37:06.000000",
+        latitude="55",
+        longitude="66"
+    )
+    response = stub.LocationCreate(new_location)
+    print(response)
+
+==> client will send new location and it will send location to kafka and then is stored in database

@@ -1,0 +1,133 @@
+openapi: 3.0.1
+info:
+  title: Udaconnect
+  description: Test udaconnect app
+  version: '0.1'
+servers:
+  - url: http://localhost:30004
+  - url: http://localhost:30003
+paths:
+  /api/persons/1:
+    get:
+      description: Get person by id
+      responses:
+        '200':
+          description: Get person by id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  company_name:
+                    type: string
+                  last_name:
+                    type: string
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+              examples:
+                '0':
+                  value: >
+                    {"id": 1, "last_name": "Trẽler", "company_name": "Hampton, 
+                    Hampton and McQuill", "first_name": "Pam"}
+      servers:
+        - url: http://localhost:30003
+    servers:
+      - url: http://localhost:30003
+  /api/persons:
+    get:
+      description: Get all persons
+      responses:
+        '200':
+          description: Get all persons
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >
+                    [{"id": 5, "last_name": "Fargo", "company_name": "Alpha
+                    Omega Upholstery", "first_name": "Taco"}, {"id": 6,
+                    "last_name": "Shader", "company_name": "USDA", "first_name":
+                    "Frank"}, {"id": 1, "last_name": "Trexler", "company_name":
+                    "Hampton, Hampton and McQuill", "first_name": "Pam"}, {"id":
+                    8, "last_name": "Badman", "company_name": "Paul Badman &
+                    Associates", "first_name": "Paul"}, {"id": 9, "last_name":
+                    "Spring", "company_name": "The Chicken Sisters Restaurant",
+                    "first_name": "Otto"}, {"id": 2, "last_name": "Le",
+                    "company_name": "Hilton", "first_name": "Nhan"}, {"id":
+                    3, "last_name": "John", "company_name": "BMM",
+                    "first_name": "Stone"}]
+      servers:
+        - url: http://localhost:30003
+    post:
+      description: Post new person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_name:
+                  type: string
+                last_name:
+                  type: string
+                first_name:
+                  type: string
+            examples:
+              '0':
+                value: "{\r\n    \"first_name\":\"Nhan\",\r\n    \"last_name\":\"Le\",\r\n    \"company_name\":\"Hilton\"\r\n}"
+      responses:
+        '200':
+          description: Post new person
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  company_name:
+                    type: string
+                  last_name:
+                    type: string
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+              examples:
+                '0':
+                  value: >
+                    {"id": 2, "last_name": "Le", "company_name": "Hilton",
+                    "first_name": "Le"}
+      servers:
+        - url: http://localhost:30003
+    servers:
+      - url: http://localhost:30003
+  /api/persons/5/connection:
+    get:
+      description: Get people by distance and date
+      parameters:
+        - name: end_date
+          in: query
+          schema:
+            type: string
+          example: '2020-09-01'
+        - name: distance
+          in: query
+          schema:
+            type: string
+          example: '555'
+        - name: start_date
+          in: query
+          schema:
+            type: string
+          example: '2020-04-01'
+      responses:
+        '200':
+          description: Get people by distance and date
+      servers:
+        - url: http://localhost:30004
+    servers:
+      - url: http://localhost:30004
