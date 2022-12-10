@@ -1,0 +1,5 @@
+Conection, Person and Front-end microservice:
+	I use API Restful with protocol HTTP because it does not running streaming data. So I think Rest API is the better solution than gRPC
+
+Location microservice:
+	I use gRPC because it might get a large data. gRPC does running streaming data. So, gRPC is the best solution for location microservice.
